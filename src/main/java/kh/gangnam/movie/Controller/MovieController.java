@@ -28,4 +28,9 @@ public class MovieController {
 
         return movieService.getBoxOfficeData2(day);
     }
+
+    @GetMapping("/save/{day}")
+    public void save(@PathVariable(value = "day") String day) throws JsonProcessingException {
+        movieService.save(day);
+    }
 }
