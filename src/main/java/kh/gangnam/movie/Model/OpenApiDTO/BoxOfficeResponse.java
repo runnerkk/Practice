@@ -9,4 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BoxOfficeResponse {
     private BoxOfficeResult boxOfficeResult;
+
+    public BoxOfficeResponse(BoxOfficeResult boxOfficeResult) {
+        this.boxOfficeResult = boxOfficeResult;
+    }
 }

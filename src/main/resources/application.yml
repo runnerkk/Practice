@@ -16,5 +16,5 @@ spring:
         format_sql: true
 
 openapi:
-  api-key: 2fc025fbd9451be44eef75ff7b9e2c59
+  api-key: 970d4d552ade81a72fd4391a1a871dd9
   daily: http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json

@@ -11,12 +11,14 @@ import kh.gangnam.movie.Repository.BoxOfficeResultDAORepository;
 import kh.gangnam.movie.Repository.DailyBoxOfficeDAORepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class MovieService {
 
     private final RestTemplate restTemplate;

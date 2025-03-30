@@ -10,6 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 public class BoxOfficeResult {
     private String boxofficeType;
-    private String showRange;
+    private String showDate;
     private List<DailyBoxOffice> dailyBoxOfficeList;
 }

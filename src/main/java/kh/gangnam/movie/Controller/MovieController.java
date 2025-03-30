@@ -6,7 +6,6 @@ import kh.gangnam.movie.Model.OpenApiDTO.BoxOfficeResponse;
 import kh.gangnam.movie.Service.MovieService;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/api")
 public class MovieController {
@@ -25,7 +24,6 @@ public class MovieController {
 
     @GetMapping("/open/responseentity/daily-box-office/{day}")
     public BoxOfficeResponse daily2(@PathVariable(value = "day") String day) throws JsonProcessingException {
-
         return movieService.getBoxOfficeData2(day);
     }
 
