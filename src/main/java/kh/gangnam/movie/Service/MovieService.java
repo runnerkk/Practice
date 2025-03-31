@@ -7,8 +7,10 @@ import kh.gangnam.movie.Model.OpenApiDAO.BoxOfficeResultDAO;
 import kh.gangnam.movie.Model.OpenApiDAO.DailyBoxOfficeDAO;
 import kh.gangnam.movie.Model.OpenApiDTO.BoxOfficeResponse;
 import kh.gangnam.movie.Model.OpenApiDTO.DailyBoxOffice;
+import kh.gangnam.movie.Repository.ActorDAORepository;
 import kh.gangnam.movie.Repository.BoxOfficeResultDAORepository;
 import kh.gangnam.movie.Repository.DailyBoxOfficeDAORepository;
+import kh.gangnam.movie.Repository.MovieDAORepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,12 +27,16 @@ public class MovieService {
     private final ObjectMapper objectMapper;
     private final BoxOfficeResultDAORepository boxOfficeResultDAORepository;
     private final DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository;
+    private final MovieDAORepository movieRepository;
+    private final ActorDAORepository actorRepository;
 
-    public MovieService(RestTemplate restTemplate, ObjectMapper objectMapper, BoxOfficeResultDAORepository boxOfficeResultDAORepository, DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository) {
+    public MovieService(RestTemplate restTemplate, ObjectMapper objectMapper, BoxOfficeResultDAORepository boxOfficeResultDAORepository, DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository, MovieDAORepository movieRepository, ActorDAORepository actorRepository) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
         this.boxOfficeResultDAORepository = boxOfficeResultDAORepository;
         this.dailyBoxOfficeDAORepository = dailyBoxOfficeDAORepository;
+        this.movieRepository = movieRepository;
+        this.actorRepository = actorRepository;
     }
 
     @Value("${openapi.api-key}")

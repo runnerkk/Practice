@@ -24,10 +24,10 @@ public class BoxOfficeResultDAO {
     public static BoxOfficeResultDAO fromDTO(BoxOfficeResult dto) {
         BoxOfficeResultDAO dao = new BoxOfficeResultDAO();
         dao.boxofficeType = dto.getBoxofficeType();
-        String showRange = dto.getShowDate();
-        if (showRange != null && showRange.contains("~")) {
-            dao.showDate = showRange.split("~")[0]; // ~ 앞의 첫 부분만 사용
-        }
+
+        String original = dto.getShowRange();
+        String onlyDate = original.split("~")[0];
+        dao.showDate = onlyDate;
         return dao;
     }
 }
