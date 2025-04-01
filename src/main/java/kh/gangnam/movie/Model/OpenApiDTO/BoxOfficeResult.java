@@ -11,5 +11,5 @@ import java.util.List;
 public class BoxOfficeResult {
     private String boxofficeType;
     private String showRange;
-
+    private List<DailyBoxOffice> dailyBoxOfficeList;
 }

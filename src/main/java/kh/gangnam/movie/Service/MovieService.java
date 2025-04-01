@@ -27,16 +27,12 @@ public class MovieService {
     private final ObjectMapper objectMapper;
     private final BoxOfficeResultDAORepository boxOfficeResultDAORepository;
     private final DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository;
-    private final MovieDAORepository movieRepository;
-    private final ActorDAORepository actorRepository;
 
-    public MovieService(RestTemplate restTemplate, ObjectMapper objectMapper, BoxOfficeResultDAORepository boxOfficeResultDAORepository, DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository, MovieDAORepository movieRepository, ActorDAORepository actorRepository) {
+    public MovieService(RestTemplate restTemplate, ObjectMapper objectMapper, BoxOfficeResultDAORepository boxOfficeResultDAORepository, DailyBoxOfficeDAORepository dailyBoxOfficeDAORepository) {
         this.restTemplate = restTemplate;
         this.objectMapper = objectMapper;
         this.boxOfficeResultDAORepository = boxOfficeResultDAORepository;
         this.dailyBoxOfficeDAORepository = dailyBoxOfficeDAORepository;
-        this.movieRepository = movieRepository;
-        this.actorRepository = actorRepository;
     }
 
     @Value("${openapi.api-key}")
@@ -69,19 +65,17 @@ public class MovieService {
         BoxOfficeResponse result = objectMapper.readValue(response, BoxOfficeResponse.class);
 
         BoxOfficeResultDAO boxOfficeResultDAO = BoxOfficeResultDAO.fromDTO(result.getBoxOfficeResult());
-
         List<DailyBoxOfficeDAO> dailyBoxOfficeDAOList = new ArrayList<>();
+
         for (DailyBoxOffice dto : result.getBoxOfficeResult().getDailyBoxOfficeList()) {
             DailyBoxOfficeDAO dailyBoxOfficeDAO = DailyBoxOfficeDAO.fromDTO(dto);
+            dailyBoxOfficeDAO.setBoxOfficeResult(boxOfficeResultDAO);
             dailyBoxOfficeDAOList.add(dailyBoxOfficeDAO);
         }
 
         boxOfficeResultDAO.setDailyBoxOfficeList(dailyBoxOfficeDAOList);
-        BoxOfficeResultDAO saveResult = boxOfficeResultDAORepository.save(boxOfficeResultDAO);
-        for (DailyBoxOfficeDAO daily : boxOfficeResultDAO.getDailyBoxOfficeList()) {
-            daily.setBoxOfficeResult(saveResult);
-            dailyBoxOfficeDAORepository.save(daily);
-        }
+
+        boxOfficeResultDAORepository.save(boxOfficeResultDAO);
         System.out.println("저장 성공");
     }
 }
